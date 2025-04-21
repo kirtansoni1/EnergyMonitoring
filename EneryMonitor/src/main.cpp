@@ -2,18 +2,18 @@
 #include <WiFiUdp.h>
 #include <EmonLib.h>
 
-#define CURRENT_PIN 34
-#define CALIBRATION 60.6    // Fine tune if needed
-#define VOLTAGE 230.0      // Assume constant 230V AC
-#define UDP_PORT 5005
-#define UPDATE_RATE_MS 1000
-#define SERVER_IP "192.168.1.100"  // Replace with actual server IP
+// #define CURRENT_PIN 7
+#define CALIBRATION 60.6
+#define VOLTAGE 230.0
+#define UDP_PORT 8000
+#define UPDATE_RATE_MS 500
+#define SERVER_IP "192.168.0.149"
 
 EnergyMonitor emon1;
 WiFiUDP udp;
 
 void connectToWiFi() {
-  WiFi.begin("ANJANSONI", "123456789");
+  WiFi.begin("ANJANSONI", "1234567890");
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
     Serial.print(".");
@@ -35,7 +35,6 @@ void readVoltageCurrentSensors(void *parameter) {
     udp.endPacket();
 
     Serial.printf("Sent: I = %.3f A, P = %.2f W\n", Irms, power);
-
     vTaskDelayUntil(&lastWakeTime, pdMS_TO_TICKS(UPDATE_RATE_MS));
   }
 }

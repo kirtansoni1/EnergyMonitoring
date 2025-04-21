@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Power Monitor</title>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+  <h1>Real-Time Power Monitoring</h1>
+  <div id="plot" style="width:100%;height:600px;"></div>
+
+  <script>
+    function updatePlot() {
+      fetch('/data')
+        .then(res => res.json())
+        .then(data => {
+          Plotly.react('plot', data.data, data.layout);
+        });
+    }
+
+    setInterval(updatePlot, 1000);
+    updatePlot();
+  </script>
+</body>
+</html>
