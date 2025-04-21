@@ -3,6 +3,7 @@
 #include <EmonLib.h>
 
 // #define CURRENT_PIN 7
+#define CURRENT_PIN 7
 #define CALIBRATION 60.6
 #define VOLTAGE 230.0
 #define UDP_PORT 8000
